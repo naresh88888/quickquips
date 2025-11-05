@@ -1,0 +1,36 @@
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints/
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs & cache
+*.log
+logs/
+.cache/
+build/
+dist/
+
+# Node (if any)
+node_modules/
+
+# Env & secrets
+.env
+*.env
+
+# Data — keep only a tiny sample in repo
+data/**
+!data/.gitkeep
+!data/articles_sample.jsonl
+
+# Streamlit
+.streamlit/secrets.toml

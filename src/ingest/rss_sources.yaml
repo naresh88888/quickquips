@@ -1,0 +1,11 @@
+health:
+  - https://www.sciencedaily.com/rss/health_medicine.xml
+  - https://www.medicalnewstoday.com/rss
+  - https://www.who.int/rss-feeds/news-english.xml
+  - https://www.nature.com/subjects/medicine.rss
+
+tech:
+  - https://techcrunch.com/feed/
+  - https://www.theverge.com/rss/index.xml
+  - https://www.wired.com/feed/rss
+  - https://spectrum.ieee.org/feed

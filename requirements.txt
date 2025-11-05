@@ -1,0 +1,10 @@
+streamlit
+pandas
+python-dotenv
+requests
+scikit-learn
+plotly
+wordcloud
+matplotlib
+Pillow
+streamlit-autorefresh

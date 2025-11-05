@@ -1,0 +1,30 @@
+{
+  "health": [
+    "https://www.medicalnewstoday.com/rss",
+    "https://www.medicalxpress.com/rss-feed/"
+  ],
+  "tech": [
+    "https://www.theverge.com/rss/index.xml",
+    "https://news.ycombinator.com/rss"
+  ],
+  "sports": [
+    "https://www.espn.com/espn/rss/news",
+    "https://www.skysports.com/rss/12040"
+  ],
+  "finance": [
+    "https://www.reuters.com/finance/markets/rss",
+    "https://feeds.marketwatch.com/marketwatch/topstories/"
+  ],
+  "immigration": [
+    "https://www.migrationpolicy.org/rss.xml",
+    "https://www.iom.int/rss-feeds/news" 
+  ],
+  "politics": [
+    "https://www.reuters.com/politics/rss",
+    "https://feeds.bbci.co.uk/news/politics/rss.xml"
+  ],
+  "weather": [
+    "https://www.metoffice.gov.uk/public/data/PWSCache/WarningsRSS/Region/UK",
+    "https://www.weather.gov/rss_page.php?site_name=nws"
+  ]
+}
