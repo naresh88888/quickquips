@@ -8,3 +8,4 @@ wordcloud
 matplotlib
 Pillow
 streamlit-autorefresh
+PyYAML
