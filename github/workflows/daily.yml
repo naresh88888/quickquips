@@ -1,0 +1,66 @@
+name: QuickQuips Daily Refresh
+
+on:
+  schedule:
+    # 07:30 IST ≈ 02:00 UTC every day
+    - cron: "0 2 * * *"
+  workflow_dispatch: {}  # allow manual run
+
+permissions:
+  contents: write    # needed to push updated data back to the repo
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # keep full history; safer for commits
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          # If your pipeline needs extra parsers, add them here:
+          # pip install trafilatura feedparser
+
+      - name: Run pipeline (fetch + summarize)
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          THEMES: ${{ secrets.THEMES || 'health,tech,sports,finance,immigration,politics,weather' }}
+          LIMIT_SOURCES: ${{ secrets.LIMIT_SOURCES || '2' }}
+        run: |
+          echo "Running main.py for themes: $THEMES (limit $LIMIT_SOURCES feeds/theme)"
+          python main.py
+
+      # OPTIONAL: keep repo small — trim to last 500 articles
+      - name: Trim articles.jsonl to last 500 lines
+        run: |
+          set -e
+          FILE="data/articles.jsonl"
+          if [ -f "$FILE" ]; then
+            LINES=$(wc -l < "$FILE")
+            echo "Current lines: $LINES"
+            if [ "$LINES" -gt 500 ]; then
+              tail -n 500 "$FILE" > data/articles_trimmed.jsonl
+              mv data/articles_trimmed.jsonl "$FILE"
+              echo "Trimmed to 500."
+            else
+              echo "No trim needed."
+            fi
+          else
+            echo "No $FILE found; skipping trim."
+          fi
+
+      - name: Commit and push if changed
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(data): daily refresh articles.jsonl"
+          file_pattern: data/articles.jsonl
